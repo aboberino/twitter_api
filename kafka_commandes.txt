@@ -1,0 +1,13 @@
+Run docker:
+start: systemctl start docker
+verifier: systemctl status docker
+
+Docker-compose:
+Lancer le docker compose (détaché) : docker-compose -f docker-compose.yml up -d 
+Rentrer dans le container Kafka : docker exec -it kafka /bin/sh 
+
+Kafka:
+Créer un topic: kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic tweets
+Lister les topics: kafka-topics.sh --list --zookeeper zookeeper:2181
+Démarer un producer: kafka-console-producer.sh --broker-list localhost:9092 --topic tweets
+Démarer un consumer: kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tweets --from-beginning
